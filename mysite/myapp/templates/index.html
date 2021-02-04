@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2>This is a Heading {{ variable }}</h2>
+<p>This is a paragraph.</p>
+
+<ul>
+    {% for i in items %}
+    <li>Item {{ i }}</li>
+    {% endfor %}
+</ul>
+{% if prev >= 0 %}
+<a href="/{{ prev }}/">Prev</a>
+{% endif %}
+<a href="/{{ next }}/">Next</a>
+
+{% endblock %}

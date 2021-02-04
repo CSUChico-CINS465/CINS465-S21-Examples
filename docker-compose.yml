@@ -6,6 +6,7 @@ services:
     build: .
     volumes:
        - .:/code
-    # ports:
-    #    - 8000:8000
-    # command: python /code/mysite/manage.py runserver 0.0.0.0:8000
+    ports:
+       - 8000:8000
+    # user: "1034:1002" #system dependant
+    command: python /code/mysite/manage.py runserver 0.0.0.0:8000

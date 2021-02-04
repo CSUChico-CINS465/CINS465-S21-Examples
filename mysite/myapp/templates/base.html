@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<!--Taken from https://www.w3schools.com/html/-->
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+{% block css %}{% endblock %}
+</head>
+<body>
+    <!--Nav Bar-->
+    {% block content %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>
