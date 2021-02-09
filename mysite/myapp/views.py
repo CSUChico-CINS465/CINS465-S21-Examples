@@ -1,15 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from . import models
+
 # Create your views here.
-def index(request, page=0):
-    content = list(range(page*10,page*10+10,1))
+def index(request):
+    suggestion_objects = models.SuggestionModel.objects.all()
     context = {
         "title":"CINS 465 Title",
         "variable": "Awesome Template",
-        "items":content,
-        "next":page+1,
-        "prev":page-1
+        "suggestions":suggestion_objects,
     }
     return render(request, "index.html", context=context)
     # return HttpResponse("Hello World")
