@@ -17,7 +17,7 @@
             <li class="menu-text">Suggestion Site</li>
             <li>
                 {% if user.is_authenticated %}
-                    <a href="admin/logout/">Logout</a>
+                    <a href="/logout/">Logout</a>
                 {% else %}
                     <a href="/login/">Login</a>
                 {% endif %}

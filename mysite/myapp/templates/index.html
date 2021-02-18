@@ -13,7 +13,7 @@
                     <li>{{ sugg.suggestion }} - {{ sugg.author }}
                         <ul>
                             {% for comm in sugg.comments %}
-                            <li>{{ comm }}</li>
+                            <li>{{ comm.comment }} - {{ comm.author }}</li>
                             {% endfor %}
                         </ul>
                     </li>

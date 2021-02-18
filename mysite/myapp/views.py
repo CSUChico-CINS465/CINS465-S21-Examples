@@ -1,8 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, logout
 
 from . import models
 from . import forms
+
+def logout_view(request):
+    logout(request)
+    return redirect("/login/")
+
 
 # Create your views here.
 def index(request):
@@ -31,3 +37,19 @@ def index(request):
     }
     return render(request, "index.html", context=context)
     # return HttpResponse("Hello World")
+
+def register_view(request):
+    if request.method == "POST":
+        form_instance = forms.RegistrationForm(request.POST)
+        if form_instance.is_valid():
+            user = form_instance.save()
+            #authenticate the user
+            return redirect("/login/")
+    else:
+        form_instance = forms.RegistrationForm()
+    
+    context = {
+        "title":"Registration",
+        "form":form_instance
+    }
+    return render(request, "registration/register.html", context=context)
