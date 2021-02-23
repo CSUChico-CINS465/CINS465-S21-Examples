@@ -5,7 +5,24 @@
 <link rel="stylesheet" href="{% static 'css/app.css' %}" />
 {% endblock %}
 {% block content %}
-<ul>
+<div id="list-rendering">
+    <div class="grid-container">
+        <div class="grid-x grid-padding-x">
+            <ul>
+            <div v-for="sugg in suggestions" class="large-12 medium-12 small-12 cell">
+                {% verbatim %}
+                <li>{{ sugg.suggestion }} - {{ sugg.author }}
+                    <ul>
+                        <li v-for="comm in sugg.comments">{{ comm.comment }} - {{ comm.author }}</li>
+                    </ul>
+                </li>
+                {% endverbatim %}
+            </div>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- <ul>
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
             {% for sugg in suggestions %}
@@ -21,7 +38,7 @@
             {% endfor %}
         </div>
     </div>
-</ul>
+</ul> -->
 {% if request.user.is_authenticated %}
 <form action="/" method="post">
     {% csrf_token %}
@@ -45,3 +62,9 @@
 </form>
 {% endif %}
 {% endblock %}
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="{% static 'js/myvue.js' %}"></script>
+{% endblock %}
+
