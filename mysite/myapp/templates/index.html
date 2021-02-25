@@ -5,62 +5,43 @@
 <link rel="stylesheet" href="{% static 'css/app.css' %}" />
 {% endblock %}
 {% block content %}
+
+
+
+
 <div id="list-rendering">
     <div class="grid-container">
         <div class="grid-x grid-padding-x">
-            <ul>
-            <div v-for="sugg in suggestions" class="large-12 medium-12 small-12 cell">
-                {% verbatim %}
-                <li>{{ sugg.suggestion }} - {{ sugg.author }}
-                    <ul>
-                        <li v-for="comm in sugg.comments">{{ comm.comment }} - {{ comm.author }}</li>
-                    </ul>
-                </li>
-                {% endverbatim %}
+            <div  class="large-10 medium-10 small-12 large-offset-1 medium-offset-1 cell">
+                <div class="card-info primary" v-for="sugg in suggestions">
+                    <div class="card-info-content">
+                        {% verbatim %}
+                        <h3 class="lead">{{ sugg.suggestion }}</h3>
+                        authored by {{ sugg.author }}
+                        </br>
+                        created on {{ sugg.date }}
+                        <div class grid-x>
+                            <div  class="large-10 medium-10 small-12 large-offset-1 medium-offset-1 cell">
+                                <div class="card-info primary" v-for="comm in sugg.comments">
+                                    <div class="card-info-content">
+                                        {{ comm.comment }} - {{ comm.author }} - {{ comm.date }}
+                                    </div>
+                                </div>
+                                {% endverbatim %}
+                                {% if user.is_authenticated %}
+                                <a :href="'/comment/'+ sugg.id +'/'" class="button">comment</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </ul>
         </div>
     </div>
 </div>
-<!-- <ul>
-    <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            {% for sugg in suggestions %}
-                <div class="large-12 medium-12 small-12 cell">
-                    <li>{{ sugg.suggestion }} - {{ sugg.author }}
-                        <ul>
-                            {% for comm in sugg.comments %}
-                            <li>{{ comm.comment }} - {{ comm.author }}</li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</ul> -->
-{% if request.user.is_authenticated %}
-<form action="/" method="post">
-    {% csrf_token %}
-    <div class="grid-container">
-        <div class="grid-x grid-padding-x">
-            <div class="large-4 medium-4 small-4 cell">
-                {{ suggestion_form.suggestion.label }}:
-            </div>
-            <div class="large-4 medium-4 small-4 cell">
-                    
-                {{ suggestion_form.suggestion }}
-            </div>
-            <div class="large-4 medium-4 small-4 cell">
-                {{ suggestion_form.suggestion.errors }}           
-            </div>
-            <div class="large-12 medium-12 small-12 cell">
-                <input type="submit" class="button" value="Add Suggestion"/>
-            </div>
-        </div>
-    </div>
-</form>
-{% endif %}
+            
+                
+
 {% endblock %}
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

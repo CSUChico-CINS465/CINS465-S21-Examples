@@ -26,10 +26,14 @@
         </div>
         <div class="top-bar-right">
           <ul class="menu">
+            
             {% if user.is_authenticated %}
-                Welcome {{ user.username }}
+            <li><a href="/suggestion/">Add Suggestion</a></li>
+                <li><p>Welcome {{ user.username }}</p></li>
             {% else %}
+            <li>
                 Welcome Guest
+            </li>
             {% endif %}
           </ul>
         </div>
