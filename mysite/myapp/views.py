@@ -15,7 +15,7 @@ def logout_view(request):
 @login_required
 def suggestion_view(request):
     if request.method == "POST":
-        sugestion_form = forms.SuggestionForm(request.POST)
+        sugestion_form = forms.SuggestionForm(request.POST, request.FILES)
         if sugestion_form.is_valid():
             sugestion_form.save(request)
             return redirect("/")
@@ -81,6 +81,12 @@ def suggestions_view(request):
         temp_sugg["id"] = sugg.id
         temp_sugg["date"] = sugg.published_on.strftime("%Y-%m-%d")
         temp_sugg["author"] = sugg.author.username
+        if sugg.image:
+            temp_sugg["image"] = sugg.image.url
+            temp_sugg["image_desc"] = sugg.image_description
+        else:
+            temp_sugg["image"] = ""
+            temp_sugg["image_desc"] = ""
         temp_sugg["comments"] = []
         for comm in comment_objects:
             temp_comm = {}

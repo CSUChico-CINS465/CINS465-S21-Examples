@@ -17,6 +17,8 @@
                     <div class="card-info-content">
                         {% verbatim %}
                         <h3 class="lead">{{ sugg.suggestion }}</h3>
+                        <img v-bind="{ src: sugg.image, alt: sugg.image_desc }"/>
+                        </br>
                         authored by {{ sugg.author }}
                         </br>
                         created on {{ sugg.date }}
