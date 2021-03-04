@@ -1,9 +1,10 @@
+from datetime import datetime, timezone
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
-from django.contrib.auth import authenticate, logout
+from django.http import JsonResponse
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from datetime import datetime, timezone
+
 
 from . import models
 from . import forms
@@ -58,12 +59,11 @@ def register_view(request):
     if request.method == "POST":
         form_instance = forms.RegistrationForm(request.POST)
         if form_instance.is_valid():
-            user = form_instance.save()
-            #authenticate the user
+            form_instance.save()
             return redirect("/login/")
     else:
         form_instance = forms.RegistrationForm()
-    
+
     context = {
         "title":"Registration",
         "form":form_instance
@@ -97,7 +97,7 @@ def suggestions_view(request):
             time_diff_s = time_diff.total_seconds()
             if time_diff_s < 60:
                 temp_comm["date"] = "published " + str(int(time_diff_s)) + " seconds ago"
-            else:    
+            else:
                 time_diff_m = divmod(time_diff_s, 60)[0]
                 if time_diff_m < 60:
                     temp_comm["date"] = "published " + str(int(time_diff_m)) + " minutes ago"
@@ -106,7 +106,9 @@ def suggestions_view(request):
                     if time_diff_h < 24:
                         temp_comm["date"] = "published " + str(int(time_diff_h)) + " hour ago"
                     else:
-                        temp_comm["date"]  = "published on " + comm.published_on.strftime("%Y-%m-%d %H:%M:%S")
+                        temp_comm["date"]  = "published on " + comm.published_on.strftime(
+                            "%Y-%m-%d %H:%M:%S"
+                            )
             # temp_comm["date"] = comm.published_on.strftime("%Y-%m-%d %H:%M:%S")
             temp_sugg["comments"]+= [temp_comm]
         suggestion_list["suggestions"] += [temp_sugg]
