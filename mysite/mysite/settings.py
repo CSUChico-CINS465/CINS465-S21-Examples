@@ -25,7 +25,7 @@ SECRET_KEY = 'ahk+31i9vip72fh5_pn*2)p8qkt#%4agtjsc&#k6oxi&!kw$=f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["35.209.62.87"]
+ALLOWED_HOSTS = ["35.209.62.87", "www.alumnimentor.org", "alumnimentor.org"]
 
 LOGIN_REDIRECT_URL = "/"
 LOGIN_URL = "/login/"

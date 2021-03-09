@@ -1,0 +1,7 @@
+www.alumnimentor.org {
+    reverse_proxy web:8000
+}
+
+alumnimentor.org {
+    redir https://www.alumnimentor.org{uri}
+}
