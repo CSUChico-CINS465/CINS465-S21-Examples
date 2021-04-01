@@ -20,11 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ahk+31i9vip72fh5_pn*2)p8qkt#%4agtjsc&#k6oxi&!kw$=f'
+import secrets
+
+length = 50
+chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+
+SECRET_KEY = ''.join(secrets.choice(chars) for i in range(length))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["35.209.62.87", "www.alumnimentor.org", "alumnimentor.org"]
 
