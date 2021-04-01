@@ -131,5 +131,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = BASE_DIR / '/media/'
+# MEDIA_ROOT = BASE_DIR / '/media/'
 MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME = 'cins465'

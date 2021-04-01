@@ -14,6 +14,8 @@ services:
     expose:
        - 8000
     user: "1001:1002" #system dependant
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/code/mysite/cins465-spring2017-1e6a8dd16a14.json
     # command: python /code/mysite/manage.py runserver 0.0.0.0:8000
     working_dir: /code/mysite
     command: daphne -b 0.0.0.0 -p 8000 mysite.asgi:application
@@ -32,6 +34,16 @@ services:
   #     - 80:80
   #   links:
   #     - web:web
+
+  wasm:
+      # restart: always
+      build: ./wasm/
+      # user: "1001:1002" #System dependent
+      working_dir: /code/wasm-test/
+      volumes:
+         - .:/code
+      # command: wasm-pack build --target web
+
   caddy:
     image: caddy:latest
     restart: unless-stopped
@@ -42,7 +54,7 @@ services:
       - "443:443"
     volumes:
       - $PWD/Caddyfile:/etc/caddy/Caddyfile
-      - $PWD/mysite/myapp/static:/srv/static/
+      - $PWD/mysite/myapp/static:/srv/wasm/
       - caddy_data:/data
       - caddy_config:/config
 

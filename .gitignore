@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Ignore GCP creds
+mysite/cins465-spring2017-1e6a8dd16a14.json
+
 #Weird MACOS file
 __MACOSX
 
